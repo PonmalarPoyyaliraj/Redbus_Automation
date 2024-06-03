@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -31,13 +32,13 @@ public class Redbusbooking {
 			}
 		@Test
 		public void method2() {
-		driver.findElement(By.xpath("//input[@id='src']")).sendKeys("Thiruvannamalai");
-		driver.findElement(By.xpath("//text[text()='Thiruvannamalai']")).click();
+		driver.findElement(By.xpath("//input[@id='src']")).sendKeys("Chennai");
+		driver.findElement(By.xpath("//text[text()='Chennai']")).click();
 		}
 		@Test
 		public void method3() {
-		driver.findElement(By.xpath("//input[@id='dest']")).sendKeys("Bangalore");
-		driver.findElement(By.xpath("//text[text()='Bangalore']")).click();
+		driver.findElement(By.xpath("//input[@id='dest']")).sendKeys("Trichy");
+		driver.findElement(By.xpath("//text[text()='Trichy']")).click();
 			}
 		@Test
 		public void method4() {
@@ -54,34 +55,39 @@ public class Redbusbooking {
 		}
 			@Test
 			public void method7() {
-				List<WebElement> z=driver.findElements(By.xpath("//div[@class='bus-type f-12 m-top-16 l-color evBus']"));
-				List<WebElement> x=driver.findElements(By.xpath("//div[@class='dp-time f-19 d-color f-bold']"));
-				List<WebElement> d=driver.findElements(By.xpath("//div[@class='dur l-color lh-24']"));
-				List<WebElement> j=driver.findElements(By.xpath("//div[@class='bp-time f-19 d-color disp-Inline']"));
-				List<WebElement> y=driver.findElements(By.xpath("//span[@class='f-19 f-bold']"));
-				System.out.println("Available Buses:");
-				for(WebElement lo:z) {
-					System.out.println(lo.getText());	
-				}
-				System.out.println("Departure Time:");
-				for(WebElement gh:x) {
-					System.out.println(gh.getText());
-				}
-				System.out.println("time Duration:");
-				for(WebElement kl:d) {
-					System.out.println(kl.getText());
-				}
-				System.out.println("Arrival Time:");
-				for(WebElement oi:j) {
-					System.out.println(oi.getText());
-				}
-				
-				System.out.println("Bus ticket rate:");
-				for(WebElement pl:y) {
-					System.out.println(pl.getText());
-				}
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+				List<WebElement> l= driver.findElements(By.xpath("//div[contains(@class,'travel')]"));
+				List<WebElement> o = driver.findElements(By.xpath("//div[contains(@class,'dp-time')]"));
+				List<WebElement> v = driver.findElements(By.xpath("//div[contains(@class,'bp-time')]"));
+				List<WebElement> e = driver.findElements(By.xpath("//div[contains(@class,'fare d-block')]"));
+				for (int i = 0; i < l.size(); i++) {
+					if (i == l.size()-1) {
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("window.scrollTo(0,document.body.scrollHeight)",l.get(i));
+				    l=driver.findElements(By.xpath("//div[contains(@class,'travel')]"));
+					o=driver.findElements(By.xpath("//div[contains(@class,'dp-time')]"));
+					v=driver.findElements(By.xpath("//div[contains(@class,'bp-time')]"));
+					e=driver.findElements(By.xpath("//div[contains(@class,'fare d-block')]"));
+					}else {
+					String m = l.get(i).getText();
+					String a = o.get(i).getText();
+					String lq = v.get(i).getText();
+					String r = e.get(i).getText();
+					System.out.println("Bus Name: "+m+"Departure Time: "+a+"Arrival Time: "+lq+"Fare rate: "+r);
+					}
 			}
+			}
+				
+				}	
 
-	}
+
+
+
+
+
+
+
+
+
 
 
