@@ -1,0 +1,87 @@
+package in.busbooking;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Redbusbooking {
+	
+		public static WebDriver driver;
+		@BeforeClass
+		public static void method1(){
+			WebDriverManager.edgedriver().setup();
+			EdgeOptions options = new EdgeOptions();
+			options.addArguments("disable-notifications");
+			options.addArguments("disable-popups");
+			options.addArguments("start-maximized");
+			driver = new EdgeDriver(options);
+			driver.get("https://www.redbus.in/");
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			}
+		@Test
+		public void method2() {
+		driver.findElement(By.xpath("//input[@id='src']")).sendKeys("Thiruvannamalai");
+		driver.findElement(By.xpath("//text[text()='Thiruvannamalai']")).click();
+		}
+		@Test
+		public void method3() {
+		driver.findElement(By.xpath("//input[@id='dest']")).sendKeys("Bangalore");
+		driver.findElement(By.xpath("//text[text()='Bangalore']")).click();
+			}
+		@Test
+		public void method4() {
+		driver.findElement(By.xpath("//span[text()='3' and contains(@class,'fgdqFw')]")).click();
+			}
+		@Ignore
+		@Test
+		public void method5() {
+			driver.quit();
+		}
+		@Test
+		public void method6() {
+		driver.findElement(By.xpath("//button[@id='search_button']")).click();
+		}
+			@Test
+			public void method7() {
+				List<WebElement> z=driver.findElements(By.xpath("//div[@class='bus-type f-12 m-top-16 l-color evBus']"));
+				List<WebElement> x=driver.findElements(By.xpath("//div[@class='dp-time f-19 d-color f-bold']"));
+				List<WebElement> d=driver.findElements(By.xpath("//div[@class='dur l-color lh-24']"));
+				List<WebElement> j=driver.findElements(By.xpath("//div[@class='bp-time f-19 d-color disp-Inline']"));
+				List<WebElement> y=driver.findElements(By.xpath("//span[@class='f-19 f-bold']"));
+				System.out.println("Available Buses:");
+				for(WebElement lo:z) {
+					System.out.println(lo.getText());	
+				}
+				System.out.println("Departure Time:");
+				for(WebElement gh:x) {
+					System.out.println(gh.getText());
+				}
+				System.out.println("time Duration:");
+				for(WebElement kl:d) {
+					System.out.println(kl.getText());
+				}
+				System.out.println("Arrival Time:");
+				for(WebElement oi:j) {
+					System.out.println(oi.getText());
+				}
+				
+				System.out.println("Bus ticket rate:");
+				for(WebElement pl:y) {
+					System.out.println(pl.getText());
+				}
+			}
+
+	}
+
+

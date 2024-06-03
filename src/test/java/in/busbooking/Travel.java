@@ -1,9 +1,11 @@
 package in.busbooking;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -42,7 +44,7 @@ public class Travel {
 	}
 	@Test
 	public void test4() {
-		WebElement g=driver.findElement(By.xpath("//span[text()='2' and contains(@class,'fgdqFw')]"));
+		WebElement g=driver.findElement(By.xpath("//span[text()='3' and contains(@class,'fgdqFw')]"));
 		g.click();
 			
 	}
@@ -53,22 +55,21 @@ public class Travel {
 	}
 	@Test
 	public void test6() {
-		WebElement q=driver.findElement(By.xpath("//div[text()='MBT TRAVELS']"));
-		String vb=q.getText();
-		System.out.print(vb);
-		WebElement hj=driver.findElement(By.xpath("//div[text()='23:35']"));
-		String nm=hj.getText();
-		System.out.print(nm);
-		WebElement a=driver.findElement(By.xpath("//div[text()='05:35']"));
-		String x=a.getText();
-		System.out.print(x);
-		WebElement zq=driver.findElement(By.xpath("//span[text()='650']"));
-		String we=zq.getText();
-		System.out.print(we);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		List<WebElement> gt=driver.findElements(By.xpath("//div[@class='bus-type f-12 m-top-16 l-color evBus']"));
+		
+		List<WebElement> gg=driver.findElements(By.xpath("//div[@class='dp-time f-19 d-color f-bold']"));
+		System.out.println(gg);
+		List<WebElement> gh=driver.findElements(By.xpath("//div[@class='dur l-color lh-24']"));
+		System.out.println(gh);
 		
 		
-	}
+		
+
+				}
 	
+	
+
 	
 	
 	
